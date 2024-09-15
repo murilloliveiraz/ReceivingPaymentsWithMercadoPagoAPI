@@ -1,0 +1,18 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{MockBody.produto}}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtgUoBp0nYW1R4lbmcsYf-RaZ1Q-NDig3O6A&s" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      R${{MockBody.valor}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="cobrarComPix()">manda no pix papae</button>
+  </mat-card-actions>
+</mat-card>
+
+<iframe [src]="ticketURL | Safe" width="500px" height="800px" frameborder="0"></iframe>
+
