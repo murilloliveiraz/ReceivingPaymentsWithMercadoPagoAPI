@@ -39,9 +39,7 @@ export class PixComponent implements OnInit {
 
     this.pixService.cobrarPix(pixRequest).subscribe(
       (response: any) => {
-        console.log(this.ticketURL);
-        console.log('Resposta do servidor:', response);
-        this.ticketURL =response.pointOfInteraction.transactionData.ticketUrl;
+        this.ticketURL = response.pointOfInteraction.transactionData.ticketUrl;
       },
       (error) => {
         console.error('Erro ao cobrar Pix:', error);

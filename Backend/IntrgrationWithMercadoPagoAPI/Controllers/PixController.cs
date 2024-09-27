@@ -12,19 +12,12 @@ namespace IntrgrationWithMercadoPagoAPI.Controllers
     [ApiController]
     public class PixController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok("tudo ok no get");
-        }
-
         [HttpPost]
         public async Task<IActionResult> Post(PixRequest paymentPayer)
         {
             var requestOptions = new RequestOptions();
             string idempotencyKey = Guid.NewGuid().ToString();
             requestOptions.CustomHeaders.Add("x-idempotency-key", idempotencyKey);
-            Console.WriteLine(paymentPayer.notification_url);
             var request = new PaymentCreateRequest
             {
                 TransactionAmount = paymentPayer.Valor,
@@ -41,10 +34,8 @@ namespace IntrgrationWithMercadoPagoAPI.Controllers
                         Number = paymentPayer.CPF,
                     },
                 },
-                NotificationUrl = paymentPayer.notification_url
+                NotificationUrl = paymentPayer.Notification_url
             };
-
-            Console.WriteLine(request);
 
             var client = new PaymentClient();
             Payment payment = await client.CreateAsync(request, requestOptions);
@@ -55,7 +46,6 @@ namespace IntrgrationWithMercadoPagoAPI.Controllers
         [Route("pix-response")]
         public async Task<IActionResult> Post(object request)
         {
-            Console.WriteLine(request);
            return Ok(request);
         }
     }
